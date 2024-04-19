@@ -1,0 +1,1400 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable">
+<title>not_th3dev</title>
+
+<style>
+
+#typing1{
+  font-size: 40px;
+}
+#typing2{
+  font-size: 15px;
+}
+* {
+  margin: 0;
+  padding: 0;
+  ;
+}
+@font-face {
+    font-family: 'Gmarket Sans TTF';
+    src: url('GmarketSansTTFMedium.ttf') format('truetype');
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  overflow-x: hidden;
+}
+
+body {
+}
+.snd{
+  background-color: #121212; /* Visible contrasting color for demonstration */
+  height: 150vh; /* Ensure this is enough to scroll over the main container */
+  width: 100%;
+  position: relative; /* Higher stacking context to overlap the sticky element */
+  z-index: 200; /* Make sure this is higher than the .main-container */
+}
+.trd{
+  background-color: #121212; /* Visible contrasting color for demonstration */
+  height: 100vh; /* Ensure this is enough to scroll over the main container */
+  width: 100%;
+  position: relative; /* Higher stacking context to overlap the sticky element */
+  z-index: 200; /* Make sure this is higher than the .main-container */
+}
+.main-container {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  perspective: 1000px;
+  user-select: none;
+  padding-bottom: 50px;
+  z-index: 100; 
+}
+
+
+.cube {
+  transform: rotateX(-25deg) rotateY(25deg);
+  cursor: move;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 10vmin;
+  height: 10vmin;
+  left: 50%;
+  top: 50%;
+  margin: -5vmin 0 0 -5vmin; /* Centering the cube */
+  background-color: rgba(0, 0, 0, 0);
+  /* Add lighting effects */
+
+}
+
+.cube .face {
+  box-sizing: border-box;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0);
+  width: 10vmin;
+  height: 10vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /* Add lighting effects */
+}
+
+.cube .face.front {
+  transform: translateX(0px) translateY(0px) translateZ(5vmin) rotateX(0deg) rotateY(0deg);
+}
+
+.cube .face.back {
+  transform: translateX(0px) translateY(0px) translateZ(-5vmin) rotateX(0deg) rotateY(180deg); /* Changed rotation */
+}
+
+.cube .face.top {
+  transform: translateX(0px) translateY(-5vmin) translateZ(0px) rotateX(90deg) rotateY(0deg);
+}
+
+.cube .face.bottom {
+  transform: translateX(0px) translateY(5vmin) translateZ(0px) rotateX(90deg) rotateY(0deg);
+}
+
+.cube .face.left {
+  transform: translateX(-5vmin) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(-90deg); /* Changed rotation */
+}
+
+.cube .face.right {
+  transform: translateX(5vmin) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(90deg);
+}
+
+#currentFace {
+  color: rgb(41, 41, 41);
+  position: absolute;
+  font-size: 160px;
+  z-index: -1; /* Ensure it's not behind other elements */
+  text-align: center;
+  transition: ease-in-out;
+  font-weight: 1000;
+  width: 100%;
+  text-shadow: rgb(42, 42, 42) 0px 0px 40px;
+  font-family: Gmarket Sans TTF;
+}
+
+.text-container {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.text-container .text {
+  font-size: 20px;
+  font-family: Gmarket Sans TTF;
+  margin-bottom: 20px;
+  color: #E6E6E6;
+}
+
+.text-container .text:last-child {
+  font-size: 40px;
+  color: #f1f1f1;
+  font-weight: 800;
+}
+#additionalText {
+  position: absolute;
+  top: 93%; /* 현재 face의 중간 위치에서 40px 위에 배치 */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: #f9f9f9;
+  font-family: Gmarket Sans TTF;
+
+}
+
+#initialText {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Gmarket Sans TTF;
+  font-size: 12px;
+  color: #333;
+   /* Initially hidden */
+   .image-container {
+  position: absolute;
+  top: 50%;
+  right: 20px; /* 우측에 위치하도록 조정 */
+  transform: translateY(-50%);
+}
+
+}
+.additional-text {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 400px;
+  height: 300px;
+}
+.draw-the-code {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: 27px;
+  line-height: 100px;
+  font-weight: 700;
+  font-family: Gmarket Sans TTF;
+  color: #f1f1f1;
+  width: fit-content;
+  text-shadow: rgb(42, 42, 42) 0px 0px 40px;
+}
+.i {
+  color: var(--color-royalblue);
+}
+.i-not-th3dev {
+  margin: 0;
+}
+.e {
+  color: var(--color-royalblue);
+}
+.e-harrisonthedevnavercom {
+  margin: 0;
+}
+.i-not-th3dev-container {
+  position: relative;
+  line-height: 20px;
+  font-weight: 500;
+  font-size: 10px;
+}
+.dev-harris,
+.person-a,
+.person-a-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.dev-harris {
+  flex-direction: row;
+  padding: 0 19px;
+  text-align: left;
+  font-size: var(--font-size-xs);
+  color: var(--black);
+}
+.person-a,
+.person-a-wrapper {
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.person-a {
+  width: 327px;
+  flex-direction: column;
+  gap: 100.70000000000071px;
+}
+.person-a-wrapper {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 30px;
+  color: var(--color-royalblue);
+  font-family: var(--font-gmarket-sans-ttf);
+}
+.ide {
+  margin: 0;
+  color: #d6d6d6;
+}
+.span { 
+  color: var(--color-royalblue);
+}
+.p,
+.p1 {
+  margin: 0;
+  color: #F1f1f1;
+}
+.ide-container1 {
+  width: 100%;
+}
+.b,
+.ide-container {
+  position: absolute;
+  margin: 0 !important;
+}
+.ide-container {
+  width: fit-content;
+  top: 86px;
+  left: 40px;
+  font-size: 12px;
+  line-height: 30px;
+  font-weight: 500;
+  font-family: Gmarket Sans TTF;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: var(--black);
+}
+.b {
+  height: 100%;
+  width: 1129px;
+  top: 0;
+  right: -853px;
+  text-decoration: line-through;
+  line-height: 24px;
+  display: inline-block;
+  opacity: 1;
+  white-space: nowrap;
+}
+.b.animate {
+  animation: 23s linear -11.5s infinite normal forwards marquee-text;
+}
+.image-14-icon {
+  height: 3px;
+  width: 10px;
+  position: relative;
+  object-fit: cover;
+  z-index: 1;
+}
+.frame-parent,
+.parent {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.parent {
+  width: 276px;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 11px 59px 32px;
+  flex-shrink: 0;
+  font-size: 1px;
+  left: 40px;
+}
+.projectbtn{
+  background-color: #F1f1f1;
+  border-radius: 5px;
+  font-family: GmarketSansTTF;
+  color: black;
+  font-size: 10px;
+  width: 140px;
+  height: 40px;
+  border: none;
+  position: relative;
+  left: 40px;
+  cursor: pointer;
+  transition: ease-in 0.4s;
+}
+.links{
+  color: #F1f1f1;
+  font-size: 10px;
+  position: absolute;
+  margin-top: 50px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 1000;
+}
+.projectbtn:hover{
+  background-color: rgba(0, 0, 0, 0);
+  color: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  font-weight: 1000;
+}
+.gitlink{
+  cursor: pointer;
+  transition: ease-in-out 0.5s;
+}
+.gitlink:hover{
+color: #2563EB;
+}
+.bojlink{
+  cursor: pointer;
+  transition: ease-in-out 0.5s;
+}
+.bojlink:hover{
+color: #2563EB;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.dadada{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Gmarket Sans TTF;
+  font-size: 12px;
+  color: #333;
+}
+.typing { display: flex; border-right: 2px solid; 
+  position:absolute; 
+  left: 50%; 
+  transform: translateX(-50%);
+  color: #f1f1f1;
+
+  font-family: Gmarket Sans TTF;
+
+}
+        .lifr{
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+.image-row{
+  position: absolute;
+  margin-top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+}
+.lifr{
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+        .lisn{
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+    .protitle{
+      color: #f1f1f1;
+      position: absolute;
+      font-size: 50px;
+      font-family: Gmarket Sans TTF;
+      margin-top: 10px;
+    }
+    .probox{
+      width: 80%;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      float: left;
+      margin-top: 0px;
+    }
+    .proleft{
+      width: 30%;
+      height: 100%;
+    }
+    .proright{
+      width: 50%;
+      height: 100%;
+    }
+    .watch {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.visible {
+  opacity: 1;
+}
+@media (max-width: 400px) {
+  .body{
+    font-size: 10px;
+    color: #2563EB;
+  }
+  .container {
+        font-size: 20px; /* Even smaller font size for very small screens */
+    }
+
+    .btn {
+        width: 120px; /* Further reduce button size */
+        height: 25px;
+    }
+    .typing visible{
+      color: #2563EB;
+    }
+ }
+ @media (max-width: 480px) {
+   
+* {
+  margin: 0;
+  padding: 0;
+  ;
+}
+@font-face {
+    font-family: 'Gmarket Sans TTF';
+    src: url('GmarketSansTTFMedium.ttf') format('truetype');
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #121212;
+  overflow-x: hidden;
+}
+
+.snd{
+  background-color: #121212; /* Visible contrasting color for demonstration */
+  height: 150vh; /* Ensure this is enough to scroll over the main container */
+  width: 100%;
+  position: relative; /* Higher stacking context to overlap the sticky element */
+  z-index: 200; /* Make sure this is higher than the .main-container */
+}
+.trd{
+  background-color: #121212; /* Visible contrasting color for demonstration */
+  height: 100vh; /* Ensure this is enough to scroll over the main container */
+  width: 100%;
+  position: relative; /* Higher stacking context to overlap the sticky element */
+  z-index: 200; /* Make sure this is higher than the .main-container */
+}
+.main-container {
+  position: sticky;
+  top: 0;
+  min-height: 100vh;
+  perspective: 100vh;
+  user-select: none;
+  z-index: 100; 
+}
+
+
+.cube {
+  transform: rotateX(-25deg) rotateY(25deg);
+  cursor: move;
+  transform-style: preserve-3d;
+  position: absolute;
+  width: 10vmin;
+  height: 10vmin;
+  left: 50%;
+  top: 50%;
+  margin: -5vmin 0 0 -5vmin; /* Centering the cube */
+  background-color: rgba(0, 0, 0, 0);
+  z-index: 1000;
+  /* Add lighting effects */
+
+}
+
+.cube .face {
+  box-sizing: border-box;
+  border: 1px solid white;
+  background-color: rgba(0, 0, 0, 0);
+  width: 10vmin;
+  height: 10vmin;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  /* Add lighting effects */
+}
+
+.cube .face.front {
+  transform: translateX(0px) translateY(0px) translateZ(5vmin) rotateX(0deg) rotateY(0deg);
+}
+
+.cube .face.back {
+  transform: translateX(0px) translateY(0px) translateZ(-5vmin) rotateX(0deg) rotateY(180deg); /* Changed rotation */
+}
+
+.cube .face.top {
+  transform: translateX(0px) translateY(-5vmin) translateZ(0px) rotateX(90deg) rotateY(0deg);
+}
+
+.cube .face.bottom {
+  transform: translateX(0px) translateY(5vmin) translateZ(0px) rotateX(90deg) rotateY(0deg);
+}
+
+.cube .face.left {
+  transform: translateX(-5vmin) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(-90deg); /* Changed rotation */
+}
+
+.cube .face.right {
+  transform: translateX(5vmin) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(90deg);
+}
+
+#currentFace {
+  color: rgb(41, 41, 41);
+  position: absolute;
+  font-size: 50px;
+  z-index: -1; /* Ensure it's not behind other elements */
+  text-align: center;
+  transition: ease-in-out;
+  font-weight: 1000;
+  width: 100%;
+  text-shadow: rgb(42, 42, 42) 0px 0px 40px;
+  font-family: Gmarket Sans TTF;
+}
+.text-container {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%,-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-container .text {
+  font-size: 20px;
+  font-family: Gmarket Sans TTF;
+  margin-bottom: 20px;
+  color: #E6E6E6;
+}
+
+.text-container .text:last-child {
+  font-size: 10px;
+  color: #f1f1f1;
+  font-weight: 800;
+}
+#additionalText {
+  position: absolute;
+  top: 93%; /* 현재 face의 중간 위치에서 40px 위에 배치 */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 16px;
+  color: #f9f9f9;
+  font-family: Gmarket Sans TTF;
+
+}
+
+#initialText {
+  position: absolute;
+  top: 33%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Gmarket Sans TTF;
+  font-size: 1.6%;
+  color: #333;
+   /* Initially hidden */
+   .image-container {
+  position: absolute;
+  width: max-content;
+  transform: translateY(-50%);
+}
+
+}
+.additional-text {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 400px;
+  height: 300px;
+z-index: -10;
+}
+.draw-the-code {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 27px;
+  height: min-content;
+  font-weight: 700;
+  font-family: Gmarket Sans TTF;
+  color: #f1f1f1;
+  width: max-content;
+  text-shadow: rgb(42, 42, 42) 0px 0px 40px;
+
+}
+.i {
+  color: var(--color-royalblue);
+}
+.i-not-th3dev {
+  margin: 0;
+}
+.e {
+  color: var(--color-royalblue);
+}
+.e-harrisonthedevnavercom {
+  margin: 0;
+}
+.i-not-th3dev-container {
+  position: relative;
+  line-height: 20px;
+  font-weight: 500;
+  font-size: 10px;
+}
+.dev-harris,
+.person-a,
+.person-a-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.dev-harris {
+  font-size: var(--font-size-xs);
+  color: var(--black);
+  opacity: 0;
+}
+.person-a,
+.person-a-wrapper {
+  max-width: 100%;
+  flex-shrink: 0;
+}
+.person-a {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.person-a-wrapper {
+  align-self: stretch;
+  flex-direction: row;
+  padding: 0 20px;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 30px;
+  color: var(--color-royalblue);
+  font-family: var(--font-gmarket-sans-ttf);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.ide {
+  margin: 0;
+  color: #d6d6d6;
+}
+.span { 
+  color: var(--color-royalblue);
+}
+.p,
+.p1 {
+  margin: 0;
+  color: #F1f1f1;
+}
+.ide-container1 {
+  width: 100%;
+}
+.b,
+.ide-container {
+  position: absolute;
+  margin: 0 !important;
+}
+.ide-container {
+  width: fit-content;
+  top: 90%;
+  left: 40px;
+  font-size: 10px;
+  line-height: 30px;
+  font-weight: 500;
+  font-family: Gmarket Sans TTF;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  color: var(--black);
+}
+.b {
+  height: 100%;
+  width: 1129px;
+  top: 0;
+  right: -853px;
+  text-decoration: line-through;
+  line-height: 24px;
+  display: inline-block;
+  opacity: 1;
+  white-space: nowrap;
+}
+.b.animate {
+  animation: 23s linear -11.5s infinite normal forwards marquee-text;
+}
+.image-14-icon {
+  height: 3px;
+  width: 10px;
+  position: relative;
+  object-fit: cover;
+  z-index: 1;
+}
+.frame-parent,
+.parent {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+}
+.parent {
+  width: 276px;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 11px 59px 32px;
+  flex-shrink: 0;
+  font-size: 1px;
+  left: 40px;
+}
+.projectbtn{
+  opacity: 0;
+}
+.links{
+  color: #F1f1f1;
+  font-size: 10px;
+  position: absolute;
+  margin-top: 50px;
+  font-family: Gmarket Sans TTF;
+  font-weight: 1000;
+}
+.projectbtn:hover{
+  background-color: rgba(0, 0, 0, 0);
+  color: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  font-weight: 1000;
+}
+.gitlink{
+  cursor: pointer;
+  transition: ease-in-out 0.5s;
+}
+.gitlink:hover{
+color: #2563EB;
+}
+.bojlink{
+  cursor: pointer;
+  transition: ease-in-out 0.5s;
+}
+.bojlink:hover{
+color: #2563EB;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+.dadada{
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: Gmarket Sans TTF;
+  font-size: 12px;
+  color: #333;
+}
+.typing { display: flex; border-right: 2px solid; 
+  position:absolute; 
+  left: 50%; 
+  transform: translateX(-50%);
+  color: #f1f1f1;
+
+  font-family: Gmarket Sans TTF;
+
+}
+        .lifr{
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+.image-row{
+  position: absolute;
+  margin-top: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 90%;
+}
+.lifr{
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+        .lisn{
+            width: 80%;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 1px;
+            background-color: #f1f1f1;
+            position: absolute;
+        }
+    .protitle{
+      color: #f1f1f1;
+      position: absolute;
+      font-size: 50px;
+      font-family: Gmarket Sans TTF;
+      margin-top: 10px;
+    }
+    .probox{
+      width: 80%;
+      left: 50%;
+      position: absolute;
+      transform: translateX(-50%);
+      float: left;
+      margin-top: 0px;
+    }
+    .proleft{
+      width: 30%;
+      height: 100%;
+    }
+    .proright{
+      width: 50%;
+      height: 100%;
+    }
+    .watch {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+#typing1{
+  font-size: 25px;
+  width: max-content;
+  margin-top: -2px;
+  position: absolute;
+}
+
+#typing2{
+  font-size: 11px;
+  width: max-content;
+}
+.visible {
+  opacity: 1;
+}
+@media (max-width: 400px) {
+  .body{
+    font-size: 10px;
+    color: #2563EB;
+  }
+  .container {
+        font-size: 20px; /* Even smaller font size for very small screens */
+    }
+
+    .btn {
+        width: 120px; /* Further reduce button size */
+        height: 25px;
+    }
+    .typing visible{
+      color: #2563EB;
+    }
+ }
+ }
+ 
+</style>
+</head>
+<body>
+<div class="main-container">
+<div class="text-container" >
+  <div class="text" id="textfirst" style="color: #a9a9a9; width: max-content;">개발자를 뛰어넘은</div>
+  <div class="text" id="textsecond">THE ARTIST</div>
+</div>
+<div id="initialText" style="color: #F1f1f1;">큐브의 면을 옆으로 드래그하여 회전을 시작하세요.</div>
+
+<div class="cube" style="z-index: 10000;">
+  <div class="face front" style="opacity: 0.8;"></div>
+  <div class="face back" style="opacity: 0.8;"></div>
+  <div class="face top" style="opacity: 0.8;"></div>
+  <div class="face bottom" style="opacity: 0.8;"></div>
+  <div class="face left" style="opacity: 0.8;"></div>
+  <div class="face right" style="opacity: 0.8;"></div>
+
+</div>
+<div id="additionalText" class="dadada" style="margin-top: -20px; #f3f3f3; width: 1000px; text-align: center; z-index: -1;">Notth3dev, 김세준</div>
+
+<div id="currentFace" style="left: 50%; top: 50%; transform: translate(-50%,-50%);">NOTTH3DEV</div>
+
+<div class="additional-text" id="div001">
+  <section class="person-a-wrapper">
+    <div class="person-a">
+      <h1 class="draw-the-code">“DRAW THE CODE”</h1>
+      <div class="dev-harris">
+        <div class="i-not-th3dev-container" style="color: white;">
+          <p class="i-not-th3dev">
+            <span class="i">I |</span>
+            <span> @not_th3dev</span>
+          </p>
+          <p class="e-harrisonthedevnavercom">
+            <span class="e">E |</span>
+            <span> harrisonthedev@naver.com</span>
+          </p>
+        </div>
+        <div class="links">
+          <div class="gitlink">GITHUB</div>
+          <div class="bojlink">BOJ</div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="ide-container">
+    <span class="ide-container1">
+      <p class="ide">
+        IDE라는 캔버스 위에 코드라는 명령어로 그림을 그리다.
+      </p>
+      <p class="p">
+        <span class="span">프로그래밍이라는 예술</span>
+        <span>을 즐기는 아티스트,</span>
+      </p>
+      <p class="p1">김세준입니다.</p>
+    </span>
+  </section>
+</div>
+<div class="additional-text" id="div002">
+  <section class="person-a-wrapper">
+    <div class="person-a">
+      <h1 class="draw-the-code">길은 만들면 있는것.</h1>
+      <div class="dev-harris">
+      </div>
+    </div>
+  </section>
+  <section class="ide-container">
+    <span class="ide-container1">
+      <p class="ide">
+        모두가 불가능하다하고, 누구도 가능하지 않다 하는것.
+      </p>
+      <p class="p">
+        <span class="span">14살에 창업을 시작, 16살 최고매출 1000 돌파.</span>
+        <span>혁신의 개척자,</span>
+      </p>
+      <p class="p1">김세준입니다.</p>
+    </span>
+  </section>
+  <button class="projectbtn" id="">스튜디오 루멘(스타트업)</button>
+</div>
+<div class="additional-text" id="div003">
+  <section class="person-a-wrapper">
+    <div class="person-a">
+      <h1 class="draw-the-code">실패는 있어도 포기는 없다.</h1>
+      <div class="dev-harris">
+      </div>
+    </div>
+  </section>
+
+  <section class="ide-container">
+    <span class="ide-container1">
+      <p class="ide">
+        실패를 밟고 성공을, 성공을 밟고 더 큰 성공을 이뤄냅니다.
+      </p>
+      <p class="p">
+        <span class="span">4일간 2.2GB의 코드를 만들어내는등,</span>
+        <span>열정을 넘은 객기의 루키,</span>
+      </p>
+      <p class="p1">김세준입니다.</p>
+    </span>
+  </section>
+  <button class="projectbtn" onclick="window.open('https://noth3dev.github.io/imrookie/')">프로젝트 보러가기</button>
+
+</div>
+<div class="additional-text" id="div004">  
+  <section class="person-a-wrapper">
+  <div class="person-a">
+    <h1 class="draw-the-code">우주를 밝히는 빛, 초신성</h1>
+    <div class="dev-harris">
+    </div>
+  </div>
+</section>
+<section class="ide-container">
+  <span class="ide-container1">
+    <p class="ide">
+      빛은 어디에서나, 누구에게나 같다.
+    </p>
+    <p class="p">
+      <span class="span">사회적 가치를 중시하는 스타트업, 빛을 나누는 사회</span>
+      <span>세상의 밝은 빛,</span>
+    </p>
+    <p class="p1">김세준입니다.</p>
+  </span>
+</section>
+<button class="projectbtn" >비젼, 지향가치</button>
+</div>
+</div>
+
+</div>
+<div class="bgtxt"></div>
+</div>
+
+<div class="snd" style="align-items: center; user-select: none; display: flexbox;">
+  <div class="lifr"></div>
+  <div id="typing1" class="typing" style="margin-top: 100px;"></div>
+  <div id="typing2" class="typing" style="margin-top: 60px;"></div>
+  <div></div>
+  <div class="image-row">
+    <img src="figma.png" alt="이미지 1">
+    <img src="web.png" alt="이미지 2">
+    <img src="ard.png" alt="이미지 3">
+    <img src="TF.png" alt="이미지 4">
+    <img src="c.png" alt="이미지 5">
+    <img src="py.png" alt="이미지 6">
+    <img src="boj.png" alt="이미지 7">
+</div>
+<img src="sts.png"style="position: absolute; margin-top: 400px"></img>
+<div class="stspg" style="position: absolute; margin-left: 700px; margin-top: 400px; width: 80%;">
+  
+  <div class="Group90" style="width: 1024px; height: 538px; position: relative; width: 100px;">
+    <div style="width: 527px; left: 0px; top: 0px; position: absolute; color: white; font-size: 40px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 60px; word-wrap: break-word">“깡있는 만능 성장캐”</div>
+    <div class="Group86" style="width: 777px; height: 18px; left: 9px; top: 298px; position: absolute">
+      <div class="Rectangle266" style="width: 777px; height: 18px; left: 0px; top: 0px; position: absolute; background: #272727; border-radius: 20px"></div>
+      <div class="Rectangle269" style="width: 11px; height: 18px; left: 0px; top: 0px; position: absolute; background: #F7F7F7; box-shadow: 0px 4px 29.600000381469727px rgba(255, 255, 255, 0.50); border-top-left-radius: 20px; border-top-right-radius: 20px"></div>
+    </div>
+    <div class="Group88" style="width: 1015px; height: 18px; left: 9px; top: 144px; position: absolute">
+      <div class="Rectangle266" style="width: 777px; height: 18px; left: 0px; top: 0px; position: absolute; background: #272727; border-radius: 20px"></div>
+      <div class="Rectangle269" style="width: 1015px; height: 18px; left: 0px; top: 0px; position: absolute; background: #F7F7F7; box-shadow: 0px 4px 29.600000381469727px rgba(255, 255, 255, 0.50); border-top-left-radius: 20px; border-top-right-radius: 20px"></div>
+    </div>
+    <div class="Group87" style="width: 777px; height: 18px; left: 9px; top: 224px; position: absolute">
+      <div class="Rectangle265" style="width: 777px; height: 18px; left: 0px; top: 0px; position: absolute; background: #272727; border-radius: 20px"></div>
+      <div class="Rectangle270" style="width: 624px; height: 18px; left: 0px; top: 0px; position: absolute; background: #F7F7F7; box-shadow: 0px 4px 28.899999618530273px rgba(255, 255, 255, 0.50); border-top-left-radius: 20px; border-top-right-radius: 20px"></div>
+    </div>
+    <div style="left: 9px; top: 162px; position: absolute; color: white; font-size: 20px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 30px; word-wrap: break-word">깡</div>
+    <div style="width: 144px; left: 11px; top: 242px; position: absolute; color: white; font-size: 20px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 30px; word-wrap: break-word">열정</div>
+    <div style="width: 144px; left: 9px; top: 316px; position: absolute; color: white; font-size: 20px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 30px; word-wrap: break-word">현생</div>
+    <div style="width: 985px; left: 9px; top: 448px; position: absolute"><span style="color: white; font-size: 20px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 30px; word-wrap: break-word">성장으로부터 배우고, 남으로부터 배우고, 성공으로부터 배우고, 실패로부터 배우는 아티스트, <br/></span><span style="color: white; font-size: 35px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 52.50px; word-wrap: break-word">김세준입니다 :)</span></div>
+  </div>
+</div>
+<div class="lisn"></div>
+</div>
+<div class="snd">
+  <div class="lisn"></div>
+  <div class="Frame11" style="width: 1920px; height: 2000px; position: relative; background: #121212">
+    <div class="Line5" style="width: 1633.02px; height: 0px; left: 556px; top: 1762.02px; position: absolute; transform: rotate(-90deg); transform-origin: 0 0; border: 1px white solid"></div>
+    <div class="Group100" style="width: 462px; height: 135px; left: 55px; top: 144px; position: absolute">
+      <div class="Project" style="width: 462px; left: 0px; top: 0px; position: absolute; color: white; font-size: 60px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 90px; word-wrap: break-word">PROJECT</div>
+      <div style="width: 228px; left: 0px; top: 90px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 45px; word-wrap: break-word">갈려버린 영혼</div>
+    </div>
+    <div class="Line6" style="width: 407.02px; height: 0px; left: 61.99px; top: 494px; position: absolute; border: 1px white solid"></div>
+    <div class="Group93" style="width: 568px; height: 1238px; left: 55px; top: 531px; position: absolute">
+      <div style="left: 0px; top: 0px; position: absolute"><span style="color: #2563EB; font-size: 60px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 90px; word-wrap: break-word">2132</span><span style="color: #2563EB; font-size: 19px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 28.50px; word-wrap: break-word">(만원)</span></div>
+      <div style="left: 0px; top: 108px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 45px; word-wrap: break-word">총 수익금(상금 포함)</div>
+      <div style="left: 0px; top: 223px; position: absolute"><span style="color: #2563EB; font-size: 60px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 90px; word-wrap: break-word">26</span><span style="color: #2563EB; font-size: 19px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 28.50px; word-wrap: break-word">(개)</span></div>
+      <div style="left: 0px; top: 449px; position: absolute"><span style="color: #2563EB; font-size: 60px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 90px; word-wrap: break-word">6</span><span style="color: #2563EB; font-size: 19px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 28.50px; word-wrap: break-word">(개)</span></div>
+      <div style="width: 502px; left: 0px; top: 331px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 45px; word-wrap: break-word">진행한 프로젝트(개인, 팀)</div>
+      <div style="width: 298px; left: 0px; top: 539px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 45px; word-wrap: break-word">입상 경력</div>
+      <div style="width: 298px; left: 0px; top: 657px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 700; line-height: 45px; word-wrap: break-word">경력</div>
+      <div style="width: 429px; height: 46px; left: 0px; top: 721px; position: absolute; color: white; font-size: 18px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word">경기도 융합과학교육원 정보기술부 청소년 연구팀장</div>
+      <div class="Maker" style="width: 568px; height: 45px; left: 0px; top: 829px; position: absolute"><span style="color: white; font-size: 18px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word">청계중학교 자율동아리 “maker” (동장)</span><span style="color: #097300; font-size: 10px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word"> // 아두이노, 알고리즘 탐구 동아리</span></div>
+      <div class="2021" style="width: 230px; height: 34px; left: 0px; top: 772px; position: absolute; color: white; font-size: 16px; font-family: Noto Sans KR; font-weight: 400; line-height: 24px; word-wrap: break-word">2020 - 2021</div>
+      <div class="030320220105" style="width: 387px; height: 35px; left: 0px; top: 879px; position: absolute; color: white; font-size: 16px; font-family: Noto Sans KR; font-weight: 400; line-height: 24px; word-wrap: break-word">2021.03.03 - 2022.01.05</div>
+      <div class="Delta" style="width: 568px; height: 45px; left: 0px; top: 937px; position: absolute"><span style="color: white; font-size: 18px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word">청계중학교 자율동아리 “delta” (동장)</span><span style="color: #097300; font-size: 10px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word"> // 수학 지식교류, 탐구 동아리</span></div>
+      <div class="030320230105" style="width: 387px; height: 35px; left: 0px; top: 987px; position: absolute; color: white; font-size: 16px; font-family: Noto Sans KR; font-weight: 400; line-height: 24px; word-wrap: break-word">2022.03.03 - 2023.01.05</div>
+      <div style="width: 568px; height: 45px; left: 0px; top: 1045px; position: absolute; color: white; font-size: 18px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word">청계중학교 전교 학생자치회장</div>
+      <div class="030320240105" style="width: 387px; height: 35px; left: 0px; top: 1095px; position: absolute; color: white; font-size: 16px; font-family: Noto Sans KR; font-weight: 400; line-height: 24px; word-wrap: break-word">2023.03.03 - 2024.01.05</div>
+      <div style="width: 568px; height: 45px; left: 0px; top: 1153px; position: absolute; color: white; font-size: 18px; font-family: Noto Sans KR; font-weight: 700; line-height: 32px; word-wrap: break-word">스타트업, 스튜디오 루멘 대표</div>
+      <div class="04" style="width: 387px; height: 35px; left: 0px; top: 1203px; position: absolute; color: white; font-size: 16px; font-family: Noto Sans KR; font-weight: 400; line-height: 24px; word-wrap: break-word">2021. 04 - 현재</div>
+    </div>
+    <div class="Group99" style="width: 1175px; height: 337px; left: 614px; top: 157px; position: absolute">
+      <div style="width: 597px; left: 0px; top: 0px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 45px; word-wrap: break-word">진행중인 프로젝트</div>
+      <div class="Group98" style="width: 1175px; height: 264px; left: 0px; top: 73px; position: absolute">
+        <a href="https://notth3dev.notion.site/Artister-d13d0b026c3c4077a57b4cefdd920e3b" style="display: block; text-decoration: none;">
+          <div class="Rectangle259" style="width: 400px; height: 200px; left: 0px; top: 0px; position: absolute; background-size: cover; background-image: url(os.png); border-radius: 8px"></div>
+      </a>
+      <a href="https://notth3dev.notion.site/Studyengine-1324657757a04f2ca3ec9a9674c5040d" style="display: block; text-decoration: none;">
+          <div class="Rectangle260" style="width: 400px; height: 200px; left: 422px; top: 0px; position: absolute; background-size: cover; background-image: url(eng.png); border-radius: 8px"></div>
+      </a>
+      
+      </div>
+    </div>
+    <div class="Group97" style="width: 1175px; height: 669px; left: 614px; top: 585px; position: absolute">
+      <div style="width: 597px; left: 0px; top: 0px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 45px; word-wrap: break-word">진행한 프로젝트</div>
+      <div class="Group96" style="width: 1175px; height: 596px; left: 0px; top: 73px; position: absolute">
+        <a href="https://notth3dev.notion.site/Lumen-Kit-Series-2a554b4453ba43be872e30c4df674fbc" style="display: block; text-decoration: none;">
+          <div class="Rectangle261" style="width: 400px; height: 200px; left: 0px; top: 0px; position: absolute; background-size: cover; background-image: url(kit.png); border-radius: 8px"></div>
+      </a>
+      <a href="https://notth3dev.notion.site/Dimigoout-324b06e720004e76a8de4ee9fe16f4ab" style="display: block; text-decoration: none;">
+          <div class="Rectangle262" style="width: 400px; height: 200px; left: 422px; top: 0px; position: absolute; background-size: cover; background-image: url(dim.png); border-radius: 8px"></div>
+      </a>
+      <a href="https://notth3dev.notion.site/Projectiler-e8db6b88b7664e1aae9bd46cacba03e2" style="display: block; text-decoration: none;">
+          <div class="Rectangle263" style="width: 400px; height: 200px; left: 0px; top: 232px; position: absolute; background-size: cover; background-image: url(ttb.png); border-radius: 8px"></div>
+      </a>
+      <a href="https://notth3dev.notion.site/Dimigoout-324b06e720004e76a8de4ee9fe16f4ab" style="display: block; text-decoration: none;">
+          <div class="Rectangle262" style="width: 400px; height: 200px; left: 422px; top: 0px; position: absolute; background-size: cover; background-image: url(dim.png); border-radius: 8px"></div>
+      </a>
+      <a href="https://notth3dev.notion.site/Projectiler-e8db6b88b7664e1aae9bd46cacba03e2" style="display: block; text-decoration: none;">
+          <div class="Rectangle263" style="width: 400px; height: 200px; left: 0px; top: 232px; position: absolute; background-size: cover; background-image: url(ttb.png); border-radius: 8px"></div>
+      </a>
+      <a href="https://notth3dev.notion.site/The-chart-a9f911a0483d479da14664c01b398c75" style="display: block; text-decoration: none;">
+          <div class="Rectangle264" style="width: 400px; height: 200px; left: 422px; top: 232px; position: absolute; background-size: cover; background-image: url(ct.png); border-radius: 8px"></div>
+      </a>
+      
+    </div>
+    </div>
+    <div class="Group95" style="width: 598px; height: 244px; left: 613px; top: 1320px; position: absolute">
+      <div style="width: 597px; left: 1px; top: 0px; position: absolute; color: white; font-size: 30px; font-family: Gmarket Sans TTF; font-weight: 1000; line-height: 45px; word-wrap: break-word">그외 프로젝트</div>
+      <div class="Group94" style="width: 251px; height: 150px; left: 0px; top: 94px; position: absolute">
+        <div style="left: 0px; top: 0px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word">스마트홈 모델, 실사화</div>
+        <div style="left: 0px; top: 54px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word">스마트글라스 프로젝트</div>
+        
+        <div style="left: 0px; top: 108px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word; width: max-content;">Light OFF(전등 IOT)</div>
+        
+        <div style="left: 0px; top: 162px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word">감정 인식 인공지능</div>
+        <div class="LightOffIot" style="left: 1px; top: 324px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word; width: max-content;;">글씨 인식 인공지능(합성곱)</div>
+        
+        <div style="left: 0px; top: 216px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word; width: max-content;">지구실험기(지구 자전 시뮬레이터)</div>
+        
+        <div style="left: 0px; top: 270px; position: absolute; color: white; font-size: 25px; font-family: Gmarket Sans TTF; font-weight: 500; line-height: 37.50px; word-wrap: break-word; width: max-content;">악필교정 인공능/피지컬컴퓨팅 시스템</div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+<script>
+  const cubeEl = document.querySelector(".cube");
+  const currentFaceEl = document.getElementById("currentFace");
+  const textFirstEl = document.getElementById("textfirst");
+  const textSecondEl = document.getElementById("textsecond");
+  const additionalTextEl = document.getElementById("additionalText");
+  
+  let clickX = 0;
+  let clickY = 0;
+  let sensitivity = 0.5;
+  let moveX = 0;
+  let moveY = 0;
+  let lastX = -25;
+  let lastY = 25;
+  
+  cubeEl.addEventListener("mousedown", (e) => {
+    let isClick = true;
+  
+    clickX = e.screenX;
+    clickY = e.screenY;
+  
+    window.addEventListener("mousemove", (e) => {
+      if (isClick) {
+        const nowX = e.screenX;
+        const nowY = e.screenY;
+  
+        moveX = lastX + (clickY - nowY) * sensitivity;
+        moveY = lastY - (clickX - nowX) * sensitivity;
+  
+        displayContent(moveY);
+  
+        gsap.to(cubeEl, 0, {
+          transform: `rotateX(${moveX}deg) rotateY(${moveY}deg)`,
+        });
+      }
+    });
+  
+    window.addEventListener(
+      "mouseup",
+      (e) => {
+        if (isClick) {
+          lastX = moveX;
+          lastY = moveY;
+          isClick = false;
+        }
+      },
+      { once: true }
+    );
+  });
+  
+  cubeEl.addEventListener(
+    "touchstart",
+    (e) => {
+      let isTouch = true;
+  
+      clickX = e.targetTouches[0].screenX;
+      clickY = e.targetTouches[0].screenY;
+  
+      window.addEventListener("touchmove", (e) => {
+        if (isTouch) {
+          const nowX = e.targetTouches[0].screenX;
+          const nowY = e.targetTouches[0].screenY;
+  
+          moveX = lastX + (clickY - nowY) * sensitivity;
+          moveY = lastY - (clickX - nowX) * sensitivity;
+  
+          displayContent(moveY);
+  
+          gsap.to(cubeEl, 0, {
+            transform: `rotateX(${moveX}deg) rotateY(${moveY}deg)`,
+          });
+        }
+      });
+  
+      window.addEventListener(
+        "touchend",
+        (e) => {
+          if (isTouch) {
+            lastX = moveX;
+            lastY = moveY;
+            isTouch = false;
+          }
+        },
+        { once: true }
+      );
+    },
+    false
+  );
+  document.querySelector('.gitlink').addEventListener('click', function() {
+        window.open('https://github.com/noth3dev', '_blank');
+    });
+    document.querySelector('.bojlink').addEventListener('click', function() {
+        window.open('https://solved.ac/profile/derp_p', '_blank');
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      } else {
+        entry.target.classList.remove('visible');
+      }
+    });
+  });
+
+  const elements = document.querySelectorAll('.watch');
+  elements.forEach(el => observer.observe(el));
+});
+
+  function displayContent(rotation) {
+    let adjustedRotation = rotation % 360; // 각도를 360으로 나눈 나머지를 사용하여 음수 각도 처리
+    if (adjustedRotation < 0) {
+      adjustedRotation += 360; // 음수 각도를 양수로 변환
+    }
+  
+    let textCurrentFace = "";
+    let textFirst = "";
+    let textSecond = "";
+    let divToShow = "";
+    let textToShow = "";
+    if (adjustedRotation < 45 || adjustedRotation >= 315) {
+      textCurrentFace = "NOTTH3DEV";
+      textFirst = "개발자를 뛰어넘은";
+      textSecond = "THE ARTIST";
+      divToShow = "div001";
+    } else if (adjustedRotation >= 45 && adjustedRotation < 135) {
+      textCurrentFace = "PIONEER";
+      textFirst = "정보기술로 차원문을 여는";
+      textSecond = "BOLD PIONEER";
+      divToShow = "div002";
+    } else if (adjustedRotation >= 135 && adjustedRotation < 225) {
+      textCurrentFace = "SUPER ROOKIE";
+      textFirst = "깡과 열정의";
+      textSecond = "Super Rookie";
+      divToShow = "div003";
+    } else if (adjustedRotation >= 225 && adjustedRotation < 315) {
+      textCurrentFace = "SUPERNOVA";
+      textFirst = "화려하며 거대한";
+      textSecond = "SUPERNOVA";
+      divToShow = "div004";
+    } 
+    gsap.to(currentFaceEl, { duration: 0.5, opacity: 0, onComplete: () => {
+    currentFaceEl.innerText = textCurrentFace;
+    gsap.to(currentFaceEl, { duration: 0.5, opacity: 1 });
+  }});
+    gsap.to([textFirstEl, textSecondEl, additionalTextEl], { duration: 0.5, y: -20, opacity: 0, zIndex: 0, onComplete: () => {
+  textFirstEl.innerText = textFirst;
+  textSecondEl.innerText = textSecond;
+  additionalTextEl.innerText = "스크롤해서 프로젝트 보러가기";
+  gsap.to([textFirstEl, textSecondEl, additionalTextEl], { duration: 0.5, y: 0, opacity: 1, zIndex: 100 });
+}});
+
+  
+    gsap.to("#div001, #div002, #div003, #div004", { duration: 0.5, opacity: 0, zIndex: 0 }); // 모든 div를 투명하게 만듭니다.
+  
+    if (adjustedRotation < 45 || adjustedRotation >= 315) {
+      gsap.to("#div001", { duration: 0.5, opacity: 1, zIndex: 100}); // div001을 나타나도록 합니다.
+    } else if (adjustedRotation >= 45 && adjustedRotation < 135) {
+      gsap.to("#div002", { duration: 0.5, opacity: 1, zIndex: 100}); // div002를 나타나도록 합니다.
+    } else if (adjustedRotation >= 135 && adjustedRotation < 225) {
+      gsap.to("#div003", { duration: 0.5, opacity: 1, zIndex:100}); // div003을 나타나도록 합니다.
+    } else if (adjustedRotation >= 225 && adjustedRotation < 315) {
+      gsap.to("#div004", { duration: 0.5, opacity: 1, zIndex: 100}); // div004를 나타나도록 합니다.
+    }
+  }
+  
+  const initialText = document.getElementById("initialText");
+  
+  cubeEl.addEventListener("mousedown", hideInitialText);
+  cubeEl.addEventListener("touchstart", hideInitialText);
+  
+  function hideInitialText() {
+    initialText.style.display = "none";
+  }
+  
+  cubeEl.addEventListener("mouseup", showInitialText);
+  cubeEl.addEventListener("touchend", showInitialText);
+  
+  function showInitialText() {
+    initialText.style.display = "block";
+  }
+  
+  window.addEventListener('DOMContentLoaded', (event) => {
+    gsap.to("#div001, #div002, #div003, #div004", { duration: 0.5, opacity: 0, zIndex: 0 }); // 모든 div를 투명하게 만듭니다.
+    gsap.to("#div001", { duration: 0.5, opacity: 1, zIndex: 100}); 
+    let initialRotationX = -30; // X 축 회전
+    let initialRotationY = 30; // Y 축 회전
+  
+    gsap.to(cubeEl, 0, {
+      transform: `rotateX(${initialRotationX}deg) rotateY(${initialRotationY}deg)`,
+    });
+  
+    lastX = initialRotationX;
+    lastY = initialRotationY;s
+  
+    displayContent(lastY);
+  });
+  const texts = ["풀스택? 아니, 이젠 \"올라운더\"다", "ALL ROUND [AI, PS, Physical ,Front, Back, PM, Design]"]; // List of texts for each line
+        const typingElements = document.querySelectorAll('.typing');
+
+        function type(text, element) {
+            let charIndex = 0;
+            function typing() {
+                if (charIndex < text.length) {
+                    element.textContent += text[charIndex++];
+                    setTimeout(typing, 100); // 타이핑 속도 조절
+                } else {
+                    element.style.borderRight = 'none'; // 타이핑 완료 후 커서 제거
+                }
+            }
+            element.classList.add('visible'); // 타이핑 시작하면 요소를 보이게 함
+            typing();
+        }
+
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const element = entry.target;
+                    const textIndex = Array.from(typingElements).indexOf(element);
+                    if (textIndex !== -1) {
+                        type(texts[textIndex], element);
+                        observer.unobserve(element); // 타이핑이 시작되면 관찰 중지
+                    }
+                }
+            });
+        }, {
+            threshold: 0.5 // 요소가 50% 이상 보일 때 트리거
+        });
+
+        typingElements.forEach(el => {
+            observer.observe(el); // 각 타이핑 요소를 관찰
+        });
+        
+</script>
+
+</body>
+</html>
